@@ -9,8 +9,19 @@
 /* Begin PBXBuildFile section */
 		83AD05CF2AD1963300123F63 /* PWKeychainKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05CE2AD1963300123F63 /* PWKeychainKit.docc */; };
 		83AD05D52AD1963300123F63 /* PWKeychainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AD05CA2AD1963300123F63 /* PWKeychainKit.framework */; };
-		83AD05DA2AD1963300123F63 /* PWKeychainKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05D92AD1963300123F63 /* PWKeychainKitTests.swift */; };
 		83AD05DB2AD1963300123F63 /* PWKeychainKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 83AD05CD2AD1963300123F63 /* PWKeychainKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83AD05F42AD196CB00123F63 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05F32AD196CB00123F63 /* Queryable.swift */; };
+		83AD05F62AD196EF00123F63 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05F52AD196EF00123F63 /* Credentials.swift */; };
+		83AD05F82AD1970100123F63 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05F72AD1970100123F63 /* KeychainError.swift */; };
+		83AD05FA2AD1970B00123F63 /* KeychainResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05F92AD1970B00123F63 /* KeychainResult.swift */; };
+		83AD05FC2AD1971C00123F63 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05FB2AD1971C00123F63 /* Keychain.swift */; };
+		83AD05FE2AD1972E00123F63 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05FD2AD1972E00123F63 /* KeychainHelper.swift */; };
+		83AD06002AD1976A00123F63 /* PWKeychainKitKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05FF2AD1976A00123F63 /* PWKeychainKitKeychainTests.swift */; };
+		83AD06082AD197A500123F63 /* PWKeychainKitTargetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD06072AD197A500123F63 /* PWKeychainKitTargetApp.swift */; };
+		83AD060A2AD197A500123F63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD06092AD197A500123F63 /* ContentView.swift */; };
+		83AD060C2AD197A700123F63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83AD060B2AD197A700123F63 /* Assets.xcassets */; };
+		83AD060F2AD197A700123F63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83AD060E2AD197A700123F63 /* Preview Assets.xcassets */; };
+		83AD06162AD197D000123F63 /* PWKeychainKitKeychainHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD06152AD197D000123F63 /* PWKeychainKitKeychainHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -21,6 +32,13 @@
 			remoteGlobalIDString = 83AD05C92AD1963300123F63;
 			remoteInfo = PWKeychainKit;
 		};
+		83AD06132AD197AE00123F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83AD05C12AD1963300123F63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83AD06042AD197A500123F63;
+			remoteInfo = PWKeychainKitTarget;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +46,19 @@
 		83AD05CD2AD1963300123F63 /* PWKeychainKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWKeychainKit.h; sourceTree = "<group>"; };
 		83AD05CE2AD1963300123F63 /* PWKeychainKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PWKeychainKit.docc; sourceTree = "<group>"; };
 		83AD05D42AD1963300123F63 /* PWKeychainKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PWKeychainKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		83AD05D92AD1963300123F63 /* PWKeychainKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWKeychainKitTests.swift; sourceTree = "<group>"; };
+		83AD05F32AD196CB00123F63 /* Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queryable.swift; sourceTree = "<group>"; };
+		83AD05F52AD196EF00123F63 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		83AD05F72AD1970100123F63 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+		83AD05F92AD1970B00123F63 /* KeychainResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainResult.swift; sourceTree = "<group>"; };
+		83AD05FB2AD1971C00123F63 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		83AD05FD2AD1972E00123F63 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		83AD05FF2AD1976A00123F63 /* PWKeychainKitKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWKeychainKitKeychainTests.swift; sourceTree = "<group>"; };
+		83AD06052AD197A500123F63 /* PWKeychainKitTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PWKeychainKitTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83AD06072AD197A500123F63 /* PWKeychainKitTargetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWKeychainKitTargetApp.swift; sourceTree = "<group>"; };
+		83AD06092AD197A500123F63 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		83AD060B2AD197A700123F63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83AD060E2AD197A700123F63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		83AD06152AD197D000123F63 /* PWKeychainKitKeychainHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWKeychainKitKeychainHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +77,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83AD06022AD197A500123F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +92,7 @@
 			children = (
 				83AD05CC2AD1963300123F63 /* PWKeychainKit */,
 				83AD05D82AD1963300123F63 /* PWKeychainKitTests */,
+				83AD06062AD197A500123F63 /* PWKeychainKitTarget */,
 				83AD05CB2AD1963300123F63 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +102,7 @@
 			children = (
 				83AD05CA2AD1963300123F63 /* PWKeychainKit.framework */,
 				83AD05D42AD1963300123F63 /* PWKeychainKitTests.xctest */,
+				83AD06052AD197A500123F63 /* PWKeychainKitTarget.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +110,10 @@
 		83AD05CC2AD1963300123F63 /* PWKeychainKit */ = {
 			isa = PBXGroup;
 			children = (
+				83AD05FD2AD1972E00123F63 /* KeychainHelper.swift */,
+				83AD05F22AD196B100123F63 /* Keychain */,
+				83AD05F12AD196AC00123F63 /* Model */,
+				83AD05F02AD196A400123F63 /* Protocols */,
 				83AD05CD2AD1963300123F63 /* PWKeychainKit.h */,
 				83AD05CE2AD1963300123F63 /* PWKeychainKit.docc */,
 			);
@@ -80,9 +123,55 @@
 		83AD05D82AD1963300123F63 /* PWKeychainKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				83AD05D92AD1963300123F63 /* PWKeychainKitTests.swift */,
+				83AD05FF2AD1976A00123F63 /* PWKeychainKitKeychainTests.swift */,
+				83AD06152AD197D000123F63 /* PWKeychainKitKeychainHelperTests.swift */,
 			);
 			path = PWKeychainKitTests;
+			sourceTree = "<group>";
+		};
+		83AD05F02AD196A400123F63 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				83AD05F32AD196CB00123F63 /* Queryable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		83AD05F12AD196AC00123F63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83AD05F52AD196EF00123F63 /* Credentials.swift */,
+				83AD05F72AD1970100123F63 /* KeychainError.swift */,
+				83AD05F92AD1970B00123F63 /* KeychainResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83AD05F22AD196B100123F63 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				83AD05FB2AD1971C00123F63 /* Keychain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		83AD06062AD197A500123F63 /* PWKeychainKitTarget */ = {
+			isa = PBXGroup;
+			children = (
+				83AD06072AD197A500123F63 /* PWKeychainKitTargetApp.swift */,
+				83AD06092AD197A500123F63 /* ContentView.swift */,
+				83AD060B2AD197A700123F63 /* Assets.xcassets */,
+				83AD060D2AD197A700123F63 /* Preview Content */,
+			);
+			path = PWKeychainKitTarget;
+			sourceTree = "<group>";
+		};
+		83AD060D2AD197A700123F63 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				83AD060E2AD197A700123F63 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,11 +218,29 @@
 			);
 			dependencies = (
 				83AD05D72AD1963300123F63 /* PBXTargetDependency */,
+				83AD06142AD197AE00123F63 /* PBXTargetDependency */,
 			);
 			name = PWKeychainKitTests;
 			productName = PWKeychainKitTests;
 			productReference = 83AD05D42AD1963300123F63 /* PWKeychainKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		83AD06042AD197A500123F63 /* PWKeychainKitTarget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83AD06102AD197A700123F63 /* Build configuration list for PBXNativeTarget "PWKeychainKitTarget" */;
+			buildPhases = (
+				83AD06012AD197A500123F63 /* Sources */,
+				83AD06022AD197A500123F63 /* Frameworks */,
+				83AD06032AD197A500123F63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PWKeychainKitTarget;
+			productName = PWKeychainKitTarget;
+			productReference = 83AD06052AD197A500123F63 /* PWKeychainKitTarget.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -149,6 +256,11 @@
 						CreatedOnToolsVersion = 15.0;
 					};
 					83AD05D32AD1963300123F63 = {
+						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
+						TestTargetID = 83AD06042AD197A500123F63;
+					};
+					83AD06042AD197A500123F63 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -168,6 +280,7 @@
 			targets = (
 				83AD05C92AD1963300123F63 /* PWKeychainKit */,
 				83AD05D32AD1963300123F63 /* PWKeychainKitTests */,
+				83AD06042AD197A500123F63 /* PWKeychainKitTarget */,
 			);
 		};
 /* End PBXProject section */
@@ -187,6 +300,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83AD06032AD197A500123F63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83AD060F2AD197A700123F63 /* Preview Assets.xcassets in Resources */,
+				83AD060C2AD197A700123F63 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -194,7 +316,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83AD05F82AD1970100123F63 /* KeychainError.swift in Sources */,
+				83AD05F62AD196EF00123F63 /* Credentials.swift in Sources */,
+				83AD05F42AD196CB00123F63 /* Queryable.swift in Sources */,
 				83AD05CF2AD1963300123F63 /* PWKeychainKit.docc in Sources */,
+				83AD05FE2AD1972E00123F63 /* KeychainHelper.swift in Sources */,
+				83AD05FA2AD1970B00123F63 /* KeychainResult.swift in Sources */,
+				83AD05FC2AD1971C00123F63 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +330,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83AD05DA2AD1963300123F63 /* PWKeychainKitTests.swift in Sources */,
+				83AD06002AD1976A00123F63 /* PWKeychainKitKeychainTests.swift in Sources */,
+				83AD06162AD197D000123F63 /* PWKeychainKitKeychainHelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83AD06012AD197A500123F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83AD060A2AD197A500123F63 /* ContentView.swift in Sources */,
+				83AD06082AD197A500123F63 /* PWKeychainKitTargetApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +351,11 @@
 			isa = PBXTargetDependency;
 			target = 83AD05C92AD1963300123F63 /* PWKeychainKit */;
 			targetProxy = 83AD05D62AD1963300123F63 /* PBXContainerItemProxy */;
+		};
+		83AD06142AD197AE00123F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83AD06042AD197A500123F63 /* PWKeychainKitTarget */;
+			targetProxy = 83AD06132AD197AE00123F63 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -345,6 +488,7 @@
 		83AD05DF2AD1963300123F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -376,6 +520,7 @@
 		83AD05E02AD1963300123F63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -407,6 +552,28 @@
 		83AD05E22AD1963300123F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ERT3ZH7BA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polywinterdisign.PWKeychainKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PWKeychainKitTarget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PWKeychainKitTarget";
+			};
+			name = Debug;
+		};
+		83AD05E32AD1963300123F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ERT3ZH7BA7;
@@ -417,20 +584,63 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PWKeychainKitTarget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PWKeychainKitTarget";
+			};
+			name = Release;
+		};
+		83AD06112AD197A700123F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PWKeychainKitTarget/Preview Content\"";
+				DEVELOPMENT_TEAM = ERT3ZH7BA7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polywinterdisign.PWKeychainKitTarget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		83AD05E32AD1963300123F63 /* Release */ = {
+		83AD06122AD197A700123F63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PWKeychainKitTarget/Preview Content\"";
 				DEVELOPMENT_TEAM = ERT3ZH7BA7;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.polywinterdisign.PWKeychainKitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.polywinterdisign.PWKeychainKitTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,6 +672,15 @@
 			buildConfigurations = (
 				83AD05E22AD1963300123F63 /* Debug */,
 				83AD05E32AD1963300123F63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83AD06102AD197A700123F63 /* Build configuration list for PBXNativeTarget "PWKeychainKitTarget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83AD06112AD197A700123F63 /* Debug */,
+				83AD06122AD197A700123F63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
