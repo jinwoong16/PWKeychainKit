@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8369CA7E2AD2609600AC3D4E /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369CA7D2AD2609600AC3D4E /* Query.swift */; };
 		83AD05CF2AD1963300123F63 /* PWKeychainKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 83AD05CE2AD1963300123F63 /* PWKeychainKit.docc */; };
 		83AD05D52AD1963300123F63 /* PWKeychainKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AD05CA2AD1963300123F63 /* PWKeychainKit.framework */; };
 		83AD05DB2AD1963300123F63 /* PWKeychainKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 83AD05CD2AD1963300123F63 /* PWKeychainKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8369CA7D2AD2609600AC3D4E /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		83AD05CA2AD1963300123F63 /* PWKeychainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PWKeychainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83AD05CD2AD1963300123F63 /* PWKeychainKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWKeychainKit.h; sourceTree = "<group>"; };
 		83AD05CE2AD1963300123F63 /* PWKeychainKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PWKeychainKit.docc; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				83AD05F52AD196EF00123F63 /* Credentials.swift */,
 				83AD05F72AD1970100123F63 /* KeychainError.swift */,
 				83AD05F92AD1970B00123F63 /* KeychainResult.swift */,
+				8369CA7D2AD2609600AC3D4E /* Query.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				83AD05F62AD196EF00123F63 /* Credentials.swift in Sources */,
 				83AD05F42AD196CB00123F63 /* Queryable.swift in Sources */,
 				83AD05CF2AD1963300123F63 /* PWKeychainKit.docc in Sources */,
+				8369CA7E2AD2609600AC3D4E /* Query.swift in Sources */,
 				83AD05FE2AD1972E00123F63 /* KeychainHelper.swift in Sources */,
 				83AD05FA2AD1970B00123F63 /* KeychainResult.swift in Sources */,
 				83AD05FC2AD1971C00123F63 /* Keychain.swift in Sources */,
