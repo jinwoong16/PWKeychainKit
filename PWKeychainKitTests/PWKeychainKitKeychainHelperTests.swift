@@ -58,8 +58,10 @@ final class KeychainHelperTests: XCTestCase {
             try keychainHelper.save(item: credentials)
         )
         
+        let query = Query(query: normalQuery)
+        
         XCTAssertNoThrow(
-            try keychainHelper.delete(item: credentials)
+            try keychainHelper.delete(item: query)
         )
     }
     
@@ -90,7 +92,9 @@ final class KeychainHelperTests: XCTestCase {
             try keychainHelper.save(item: credentials)
         )
         
-        let result = try keychainHelper.read(item: credentials)
+        let query = Query(query: normalQuery)
+        
+        let result = try keychainHelper.read(item: query)
         
         XCTAssertEqual(result, credentials.password)
     }
