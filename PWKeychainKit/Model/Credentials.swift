@@ -7,13 +7,18 @@
 
 import Foundation
 
-struct Credentials {
+public struct Credentials {
     var username: String
     var password: String
+    
+    public init(username: String, password: String) {
+        self.username = username
+        self.password = password
+    }
 }
 
 extension Credentials: Queryable {
-    var query: [String : Any] {
+    public var query: [String : Any] {
         return [
             kSecClass as String: kSecClassGenericPassword,
             kSecValueData as String: password.data(using: .utf8)!,
