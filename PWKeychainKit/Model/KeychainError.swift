@@ -13,4 +13,6 @@ enum KeychainError: Error, Equatable {
     case alreadyExist
     case unhandledError(status: OSStatus)
     case updateValueMissing
+    case encodingError
+    case decodingError
 }
