@@ -12,81 +12,32 @@ public enum KeychainClass {
 }
 
 public protocol KeychainHelper {
-    /// Saves an item using 'Queryable' type data or
-    /// updates it if it already exists.
-    ///
-    /// - Parameter item: an item to be added.
-    /// - Throws: `KeychainError`
-    func save(item: Queryable) throws
-    
-    /// Deletes an item using `Queryable` type data.
-    ///
-    /// - Parameter item: an item to be eliminated.
-    /// - Throws: `KeychainError`
-    func delete(item: Queryable) throws
-    
-    /// Reads an item using `Queryable` type data.
-    ///
-    /// - Parameter item: an item to be searched.
-    /// - Throws: `KeychainError`
-    /// - Returns: if successful, the password string will be returned.
-    func read(item: Queryable) throws -> String
+    func read<T: Decodable>(by service: String) throws -> T
+    func save<T: Codable>(item: T, service: String) throws
+    func delete(by service: String) throws
 }
 
-public final class DefaultKeychainHelper: KeychainHelper {
+public final class DefaultKeychainHelper {
     private let keychain: Keychain
+    private let normalQuery: Queryable
     
     public init(_ keychainClass: KeychainClass) {
         switch keychainClass {
             case .genericPassword:
                 self.keychain = DefaultKeychain()
+                self.normalQuery = Query(
+                    query: [
+                        kSecClass as String: kSecClassGenericPassword
+                    ]
+                )
         }
     }
-    
-    internal init(_ keychain: Keychain) {
-        self.keychain = keychain
-    }
-    
-    public func save(item: Queryable) throws {
-        do {
-            try _ = read(item: item)
-            
-            // TODO: do update this item.
-            guard let toUpdateValue = item.query[kSecValueData as String] else {
-                throw KeychainError.updateValueMissing
-            }
-            
-            let attributes: [String: Any] = [
-                kSecValueData as String: toUpdateValue
-            ]
-            let status = keychain.update(item: item.query, with: attributes)
+}
 
-            guard status == errSecSuccess else {
-                throw KeychainError.unhandledError(status: status)
-            }
-        } catch KeychainError.noPassword {
-            // TODO: do add new keychain item.
-            let status = keychain.add(item: item.query)
-            
-            guard status == errSecSuccess else {
-                throw KeychainError.unhandledError(status: status)
-            }
-        }
-    }
-    
-    public func delete(item: Queryable) throws {
-        let status = keychain.delete(item: item.query)
-        
-        guard status != errSecItemNotFound else {
-            throw KeychainError.noPassword
-        }
-        guard status == errSecSuccess else {
-            throw KeychainError.unhandledError(status: status)
-        }
-    }
-    
-    public func read(item: Queryable) throws -> String {
-        var query = item.query
+extension DefaultKeychainHelper: KeychainHelper {
+    public func read<T>(by service: String) throws -> T where T : Decodable {
+        var query = normalQuery.query
+        query[kSecAttrService as String] = service
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = kCFBooleanTrue
         query[kSecReturnAttributes as String] = kCFBooleanTrue
@@ -101,11 +52,69 @@ public final class DefaultKeychainHelper: KeychainHelper {
         }
         
         guard let object = result.object,
-              let passwordData = object[kSecValueData as String] as? Data,
-              let password = String(data: passwordData, encoding: .utf8) else {
+              let data = object[kSecValueData as String] as? Data,
+              let decodedData: T = try? decode(data: data) else {
             throw KeychainError.unexpectedPasswordData
         }
         
-        return password
+        return decodedData
+    }
+    
+    public func save<T>(item: T, service: String) throws where T : Codable {
+        do {
+            let _: T = try read(by: service)
+            let updatedValue = try encode(data: item)
+            
+            var original = normalQuery.query
+            original[kSecAttrService as String] = service
+            
+            var query = normalQuery.query
+            query[kSecAttrService as String] = service
+            query[kSecValueData as String] = query
+            
+            let status = keychain.update(item: original, with: query)
+            
+            guard status == errSecSuccess else {
+                throw KeychainError.unhandledError(status: status)
+            }
+        } catch KeychainError.noPassword {
+            guard let encodedData = try? encode(data: item) else {
+                throw KeychainError.encodingError
+            }
+            
+            var query = normalQuery.query
+            query[kSecAttrService as String] = service
+            query[kSecValueData as String] = encodedData
+            
+            let status = keychain.add(item: query)
+            
+            guard status == errSecSuccess else {
+                throw KeychainError.unhandledError(status: status)
+            }
+        }
+    }
+    
+    public func delete(by service: String) throws {
+        var query = normalQuery.query
+        query[kSecAttrService as String] = service
+        
+        let status = keychain.delete(item: query)
+        
+        guard status != errSecItemNotFound else {
+            throw KeychainError.noPassword
+        }
+        guard status == errSecSuccess else {
+            throw KeychainError.unhandledError(status: status)
+        }
+    }
+    
+    private func decode<T: Decodable>(data: Data) throws -> T {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    }
+    
+    private func encode<T: Encodable>(data: T) throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(data)
     }
 }
