@@ -8,12 +8,14 @@
 import Foundation
 
 public struct UserToken {
-    var service: String
-    var token: String
+    public var service: String
+    public var token: String
+    public var expireAt: String
     
-    public init(service: String, token: String) {
+    public init(service: String, token: String, expireAt: String) {
         self.service = service
         self.token = token
+        self.expireAt = expireAt
     }
 }
 
