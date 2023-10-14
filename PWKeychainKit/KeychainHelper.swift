@@ -68,9 +68,9 @@ extension DefaultKeychainHelper: KeychainHelper {
             var original = normalQuery.query
             original[kSecAttrService as String] = service
             
-            var query = normalQuery.query
-            query[kSecAttrService as String] = service
-            query[kSecValueData as String] = query
+            let query = [
+                kSecValueData as String: updatedValue
+            ]
             
             let status = keychain.update(item: original, with: query)
             
