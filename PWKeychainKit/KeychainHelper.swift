@@ -12,8 +12,26 @@ public enum KeychainClass {
 }
 
 public protocol KeychainHelper {
+    /// Reads an item using its service name.
+    ///
+    /// - Parameter service: the service name of item.
+    /// - Throws: `KeychainError`
+    /// - Returns: a decoded data if successful.
     func read<T: Decodable>(by service: String) throws -> T
+    
+    /// Saves an item using its service name or
+    /// updates it if it already exists.
+    ///
+    /// - Parameters
+    ///     - item: an item to be added.
+    ///     - service: the service name of item.
+    /// - Throws: `KeychainError`
     func save<T: Codable>(item: T, service: String) throws
+    
+    /// Deletes an item using its service name.
+    ///
+    /// - Parameter service: the service name of item.
+    /// - Throws: `KeychainError`
     func delete(by service: String) throws
 }
 
