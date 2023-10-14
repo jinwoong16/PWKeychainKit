@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UserToken {
+public struct UserToken: Codable {
     public var service: String
     public var token: String
     public var expireAt: String
@@ -16,15 +16,5 @@ public struct UserToken {
         self.service = service
         self.token = token
         self.expireAt = expireAt
-    }
-}
-
-extension UserToken: Queryable {
-    public var query: [String : Any] {
-        return [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecValueData as String: token,
-            kSecAttrService as String: service
-        ]
     }
 }

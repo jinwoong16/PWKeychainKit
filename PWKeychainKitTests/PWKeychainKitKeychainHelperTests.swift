@@ -10,9 +10,10 @@ import XCTest
 
 final class KeychainHelperTests: XCTestCase {
     private var keychainHelper: KeychainHelper!
-    private var credentials = Credentials(username: "Aria", password: "creep0101")
+    private var serviceName: String = "myService"
+    private var token = UserToken(service: "myService", token: "366efe34ca5d41b2ccb406f64f482f35", expireAt: "1697280879")
     private var normalQuery: [String: Any] = [
-        kSecAttrService as String: "credentials.service",
+        kSecAttrService as String: "myService",
         kSecClass as String: kSecClassGenericPassword
     ]
 
@@ -31,23 +32,24 @@ final class KeychainHelperTests: XCTestCase {
     // MARK: KeychainHelper save tests.
     func test_save_withValidItem_shouldNotThrow() throws {
         XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials)
+            try keychainHelper.save(item: token, service: serviceName)
         )
     }
     
     func test_save_whenReplaceItem_shouldNotThrow() throws {
         // Add original one.
         XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials)
+            try keychainHelper.save(item: token, service: serviceName)
         )
         
-        let credentials2 = Credentials(
-            username: credentials.username,
-            password: "some other password"
+        let userToken2 = UserToken(
+            service: serviceName,
+            token: "123123",
+            expireAt: ""
         )
         
         XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials2)
+            try keychainHelper.save(item: userToken2, service: serviceName)
         )
     }
     
@@ -55,28 +57,17 @@ final class KeychainHelperTests: XCTestCase {
     func test_delete_withValidItem_shouldNotThrow() throws {
         // Add original one.
         XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials)
+            try keychainHelper.save(item: token, service: serviceName)
         )
         
-        let query = Query(query: normalQuery)
-        
         XCTAssertNoThrow(
-            try keychainHelper.delete(item: query)
+            try keychainHelper.delete(by: serviceName)
         )
     }
     
-    func test_delete_withNotExistItem_sholdThrow() throws {
-        // Add original one.
-        XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials)
-        )
-        
-        let notExistItem = Credentials(
-            username: "unknown user",
-            password: "unknown password"
-        )
+    func test_delete_withNonExistingItem_sholdThrow() throws {
         XCTAssertThrowsError(
-            try keychainHelper.delete(item: notExistItem)
+            try keychainHelper.delete(by: serviceName)
         ) { error in
             XCTAssertEqual(
                 error as? KeychainError,
@@ -86,24 +77,23 @@ final class KeychainHelperTests: XCTestCase {
     }
     
     // MARK: KeychainHelper read tests.
-    func test_read_withExistItem_shouldReturnPassword() throws {
+    func test_read_withExistingItem_shouldReturnPassword() throws {
         // Add original one.
         XCTAssertNoThrow(
-            try keychainHelper.save(item: credentials)
+            try keychainHelper.save(item: token, service: serviceName)
         )
         
-        let query = Query(query: normalQuery)
+        let result: UserToken = try keychainHelper.read(by: serviceName)
+        XCTAssertEqual(result.token, "366efe34ca5d41b2ccb406f64f482f35")
         
-        let result = try keychainHelper.read(item: query)
-        
-        XCTAssertEqual(result, credentials.password)
     }
     
-    func test_read_withNotExistItem_shouldThrow() throws {
+    func test_read_withNotExistingItem_shouldThrow() throws {
         // Add nothing.
-        XCTAssertThrowsError(
-            try _ = keychainHelper.read(item: credentials)
-        ) { error in
+        do {
+            let _: UserToken = try keychainHelper.read(by: serviceName)
+            XCTFail("This must be failed.")
+        } catch {
             XCTAssertEqual(
                 error as? KeychainError,
                 KeychainError.noPassword
