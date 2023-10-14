@@ -10,9 +10,9 @@ import XCTest
 
 final class KeychainTests: XCTestCase {
     private var keychain: Keychain!
-    private var credentials = Credentials(username: "Aria", password: "creep0101")
+    private var token = UserToken(service: "myService", token: "366efe34ca5d41b2ccb406f64f482f35", expireAt: "1697280879")
     private var normalQuery: [String: Any] = [
-        kSecAttrService as String: "credentials.service",
+        kSecAttrService as String: "myService",
         kSecClass as String: kSecClassGenericPassword
     ]
     
@@ -28,17 +28,22 @@ final class KeychainTests: XCTestCase {
 
     // MARK: - Keychain add tests.
     func test_add_withValidItem_shouldReturnSuccess() throws {
-        let status = keychain.add(item: credentials.query)
+        var query = normalQuery
+        query[kSecValueData as String] = try! encode(data: token)
+        let status = keychain.add(item: query)
+        
         XCTAssertEqual(status, errSecSuccess)
     }
     
     func test_add_withDuplicatedOne_shouldReturnError() throws {
         // Add first.
-        let statusOne = keychain.add(item: credentials.query)
+        var query = normalQuery
+        query[kSecValueData as String] = try! encode(data: token)
+        let statusOne = keychain.add(item: query)
         XCTAssertEqual(statusOne, errSecSuccess)
         
         // Add second.
-        let statusTwo = keychain.add(item: credentials.query)
+        let statusTwo = keychain.add(item: query)
         XCTAssertEqual(statusTwo, errSecDuplicateItem)
     }
     
@@ -51,22 +56,24 @@ final class KeychainTests: XCTestCase {
     /// - `kSecReturnAttributes`: a key whose value is a Boolean indicating whether or not to return item attributes.
     func test_fetch_withValidQuery_shouldReturnSuccess() throws {
         // Add an item.
-        let status = keychain.add(item: credentials.query)
+        var query = normalQuery
+        query[kSecValueData as String] = try! encode(data: token)
+        let status = keychain.add(item: query)
         XCTAssertEqual(status, errSecSuccess)
         
-        var query = normalQuery
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnData as String] = kCFBooleanTrue
-        query[kSecReturnAttributes as String] = kCFBooleanTrue
-        let result = keychain.fetch(with: query)
+        var fetchQuery = normalQuery
+        fetchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
+        fetchQuery[kSecReturnData as String] = kCFBooleanTrue
+        fetchQuery[kSecReturnAttributes as String] = kCFBooleanTrue
+        let result = keychain.fetch(with: fetchQuery)
         XCTAssertEqual(result.status, errSecSuccess)
         
         let item = try XCTUnwrap(result.object as? [String: Any])
         let username = try XCTUnwrap(item[kSecAttrAccount as String] as? String)
-        let passwordData = try XCTUnwrap(item[kSecValueData as String] as? Data)
-        let password = try XCTUnwrap(String(data: passwordData, encoding: .utf8))
-        XCTAssertEqual(username, credentials.username)
-        XCTAssertEqual(password, credentials.password)
+        let encodedData = try XCTUnwrap(item[kSecValueData as String] as? Data)
+        let userToken: UserToken = try XCTUnwrap(try? decode(data: encodedData))
+        
+        XCTAssertEqual(userToken.token, "366efe34ca5d41b2ccb406f64f482f35")
     }
     
     func test_fetch_withNotExistItem_shouldReturnError() throws {
@@ -82,32 +89,38 @@ final class KeychainTests: XCTestCase {
     // MARK: - Keychain delete tests.
     func test_delete_withExistItem_shouldReturnSuccess() throws {
         // Add an item.
-        let statusOne = keychain.add(item: credentials.query)
+        var query = normalQuery
+        query[kSecValueData as String] = try! encode(data: token)
+        let statusOne = keychain.add(item: query)
         XCTAssertEqual(statusOne, errSecSuccess)
         
+        // Delete the item.
         let statusTwo = keychain.delete(item: normalQuery)
         XCTAssertEqual(statusTwo, errSecSuccess)
     }
     
     func test_delete_withNotExistItem_shouldReturnError() throws {
-        // Add an item.
         let status = keychain.delete(item: normalQuery)
         XCTAssertEqual(status, errSecItemNotFound)
     }
     
     // MARK: - Keychain update tests.
     func test_update_withNewCredential_shouldReplaceOriginOne() throws {
-        var query = normalQuery
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnData as String] = kCFBooleanTrue
-        query[kSecReturnAttributes as String] = kCFBooleanTrue
+        var fetchQuery = normalQuery
+        fetchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
+        fetchQuery[kSecReturnData as String] = kCFBooleanTrue
+        fetchQuery[kSecReturnAttributes as String] = kCFBooleanTrue
+        
+        let updatedToken = try! encode(data: UserToken(service: "myService", token: "234234", expireAt: ""))
         
         let toUpdateQuery: [String: Any] = [
-            kSecValueData as String: "NotCreep0101".data(using: .utf8)!
+            kSecValueData as String: updatedToken
         ]
         
         // Add an item.
-        let statusOne = keychain.add(item: credentials.query)
+        var query = normalQuery
+        query[kSecValueData as String] = try! encode(data: token)
+        let statusOne = keychain.add(item: query)
         XCTAssertEqual(statusOne, errSecSuccess)
         
         // Update the item.
@@ -116,16 +129,27 @@ final class KeychainTests: XCTestCase {
         
         var item: CFTypeRef?
         let statusThree = SecItemCopyMatching(
-            query as CFDictionary,
+            fetchQuery as CFDictionary,
             &item
         )
         XCTAssertEqual(statusThree, errSecSuccess)
         
         let dictionary = try XCTUnwrap(item as? [String: Any])
         let username = try XCTUnwrap(dictionary[kSecAttrAccount as String] as? String)
-        let passwordData = try XCTUnwrap(dictionary[kSecValueData as String] as? Data)
-        let password = try XCTUnwrap(String(data: passwordData, encoding: .utf8))
-        XCTAssertEqual(username, "Aria")
-        XCTAssertEqual(password, "NotCreep0101")
+        let encodedData = try XCTUnwrap(dictionary[kSecValueData as String] as? Data)
+        let userToken: UserToken = try XCTUnwrap(try? decode(data: encodedData))
+        XCTAssertEqual(userToken.token, "234234")
+    }
+}
+
+extension KeychainTests {
+    private func decode<T: Decodable>(data: Data) throws -> T {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    }
+    
+    private func encode<T: Encodable>(data: T) throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(data)
     }
 }
